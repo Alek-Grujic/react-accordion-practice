@@ -16,7 +16,28 @@ const faqs = [
 ];
 
 function App() {
-  return <></>;
+  const [openItem, setOpenItem] = useState(null);
+
+  return (
+    <>
+      <div className="accordion">
+        {faqs.map((e, index) => (
+          <div
+            className={index === openItem ? "item open" : "item"}
+            key={e.title}
+            onClick={() =>
+              setOpenItem((currIndex) => (currIndex === index ? null : index))
+            }
+          >
+            <h1 className="icon number">{`${0}${index + 1}`}</h1>
+            <h1 className="title text">{e.title}</h1>
+            <span className="icon">{index === openItem ? "-" : "+"}</span>
+            {index === openItem && <p className="content-box">{e.text}</p>}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default App;
